@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd" xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <localRepository>/data01/mvnRepo/.m2/repository</localRepository>
+
+  <servers>
+  <server>
+      <id>APSP_Internal</id>
+      <username>apsp</username>
+      <password>apsp@user</password>
+    </server>
+    <server>
+      <username>admin</username>
+      <password>admin123</password>
+      <id>apsp-snapshot-local</id>
+    </server>  
+    <server>
+      <username>admin</username>
+      <password>admin123</password>
+      <id>apsp-release-local</id>
+    </server> 
+    <server>
+      <username>admin</username>
+      <password>admin123</password>
+      <id>abms-snapshot-local</id>
+    </server>  
+    <server>
+      <username>admin</username>
+      <password>admin123</password>
+      <id>abms-release-local</id>
+    </server>
+   <server>
+      <username>admin</username>
+      <password>admin123</password>
+      <id>ssp-snapshot-local</id>
+    </server> 
+    <server>
+      <username>admin</username>
+      <password>admin123</password>
+      <id>ssp-release-local</id>
+    </server>   
+    <server>
+      <username>admin</username>
+      <password>password</password>
+      <id>libs-release</id>
+    </server>
+   <server>
+      <username>admin</username>
+      <password>password</password>
+      <id>libs-snapshot</id>
+    </server> 
+    <server>
+      <username>admin</username>
+      <password>password</password>
+      <id>libs-release-local</id>
+    </server>   
+    <server>
+      <username>admin</username>
+      <password>admin123</password>
+      <id>acc-releases</id>
+    </server>    
+    <server>
+      <username>admin</username>
+      <password>admin123</password>
+      <id>acc-releases-local</id>
+    </server>
+    <server>
+      <username>admin</username>
+      <password>admin123</password>
+      <id>acc-snapshots-local</id>
+    </server> 
+    <server>
+      <username>admin</username>
+      <password>admin123</password>
+      <id>demo-snapshot-local</id>
+    </server>
+    <server>
+      <username>admin</username>
+      <password>admin123</password>
+      <id>osb-release-local</id>
+    </server>
+    <server>
+      <username>admin</username>
+      <password>admin123</password>
+      <id>ssp-wps-snapshot-local</id>
+    </server>
+
+     <server>
+      <username>admin</username>
+      <password>admin123</password>
+      <id>afcm-snapshot-local</id>
+    </server>
+
+  </servers>  
+
+
+  <mirrors>
+    <mirror>
+      <!--This sends everything else to test nexus /public -->
+      <id>nexus</id>
+      <mirrorOf>*</mirrorOf>
+      <url>http://dev.svn:8081/nexus/content/groups/public/</url>    
+	  </mirror>   
+  </mirrors>
+
+
+ <profiles>
+    <profile>
+      <id>nexus</id>
+      <!--Enable snapshots for the built in central repo to direct -->
+      <!--all requests to nexus via the mirror -->
+      <repositories>
+        <repository>
+          <id>central</id>
+          <url>http://central</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+      </repositories>
+     <pluginRepositories>
+        <pluginRepository>
+          <id>central</id>
+          <url>http://central</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+
+ <!-- Oracle profiles for Sonar instances --> 
+   <profile>
+        <id>sonar-ora-apsp</id>
+        <properties>
+            <sonar.jdbc.url>
+              jdbc:oracle:thin:@10.10.4.25:1521/APSMOC01
+            </sonar.jdbc.url>
+            <sonar.jdbc.username>APSPARCH</sonar.jdbc.username>
+            <sonar.jdbc.password>apsp0n</sonar.jdbc.password>
+            <sonar.host.url>
+              http://10.10.4.2:9001/apsp-arch
+            </sonar.host.url>
+        </properties>
+    </profile>     
+   <profile>
+        <id>sonar-ora-abms</id>
+        <properties>
+            <sonar.jdbc.url>
+              jdbc:oracle:thin:@10.10.4.25:1521/APSMOC01
+            </sonar.jdbc.url>
+            <sonar.jdbc.username>ABMS</sonar.jdbc.username>
+            <sonar.jdbc.password>apsp0n</sonar.jdbc.password>
+            <sonar.host.url>
+              http://10.10.4.2:9002/abms
+            </sonar.host.url>
+        </properties>
+    </profile>     
+   <profile>
+        <id>sonar-ora-ssp</id>
+        <properties>
+            <sonar.jdbc.url>
+              jdbc:oracle:thin:@10.10.4.25:1521/APSMOC01
+            </sonar.jdbc.url>
+            <sonar.jdbc.username>ACSSP</sonar.jdbc.username>
+            <sonar.jdbc.password>apsp0n</sonar.jdbc.password>
+            <sonar.host.url>
+              http://10.10.4.2:9003/ssp
+            </sonar.host.url>
+        </properties>
+    </profile> 
+   <profile>
+        <id>sonar-ora-test</id>
+        <properties>
+            <sonar.jdbc.url>
+              jdbc:oracle:thin:@10.10.4.25:1521/APSMOC01
+            </sonar.jdbc.url>
+            <sonar.jdbc.username>SANDBOX</sonar.jdbc.username>
+            <sonar.jdbc.password>apsp0n</sonar.jdbc.password>
+            <sonar.host.url>
+              http://10.10.4.2:9999/test
+            </sonar.host.url>
+        </properties>
+    </profile>
+   
+  </profiles>
+  <activeProfiles>
+    <!--make the profile active all the time -->
+    <activeProfile>nexus</activeProfile>
+  </activeProfiles>
+</settings>
+
+
+
+<!--
+OLD STUFF  
+  <profiles>
+    <profile>
+      <repositories>
+        <repository>
+          <id>libs-release-local</id>
+          <url>
+                http://192.168.1.99:8080/artifactory/libs-release-local
+          </url>
+        </repository>  
+        <repository>           
+            <id>acc-releases</id>
+            <url>
+                http://10.3.18.158:8081/nexus/content/repositories/public
+            </url>
+        </repository>         
+      </repositories>
+
+      
+      <pluginRepositories>
+        <pluginRepository>
+            <id>acc-releases</id>
+            <url>
+                http://10.3.18.158:8081/nexus/content/repositories/public
+            </url>
+        </pluginRepository>   
+
+
+
+
+      </pluginRepositories>
+      <id>artifactory</id>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <activeProfile>artifactory</activeProfile>
+  </activeProfiles>
+</settings>
+-->
